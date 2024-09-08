@@ -1,7 +1,14 @@
-//Gill Guimaraes
-//CIST 2341
-//Lab 2 Part II
 
+/*********************************************************
+
+   Gill Guimaraes
+
+   Lab #3 - September 6, 2024
+
+   I wrote this code myself...
+   I did not use AI or copy code from Google or another student
+
+ *********************************************************/
 
 namespace Convert
 {
@@ -49,8 +56,8 @@ namespace Convert
                     celTxtBox.Text = result.ToString();
 
                     // having fun with string Concatenation
-                    System.Diagnostics.Debug.WriteLine("Fahrenheit to Celsius. " + fahrenheitInput + " F is equal to: " + result + " celsius.");
-
+                    System.Diagnostics.Debug.WriteLine(fahrenheitInput + " F is equal to: " + result + " celsius.");
+                    fahrToCelRadio.Checked = false; //clearing radio.checked so Celsius txt box will display
                 }
                 catch
                 {
@@ -69,7 +76,8 @@ namespace Convert
                     double doubleValue = Double.Parse(celsiusInput);
                     double result = (doubleValue * 9 / 5) + 32;
                     fahrTxtBox.Text = result.ToString();
-                    System.Diagnostics.Debug.WriteLine("Celsius to Fahrenheit. " + celsiusInput + " C is equal to: " + result + " Fahrenheit.");
+                    System.Diagnostics.Debug.WriteLine(celsiusInput + " C is equal to: " + result + " Fahrenheit.");
+                    celToFahrRadio.Checked = false;
 
                 }
                 catch
@@ -83,9 +91,14 @@ namespace Convert
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Console.WriteLine("Exit button was pressed."); // this is not working.
             System.Diagnostics.Debug.WriteLine("exit button was pressed");
-            Application.Exit();
+
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Leaving already?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -95,20 +108,36 @@ namespace Convert
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (celToFahrRadio.Checked == true)
+            {
+                fahrTxtBox.Visible = false;
+            }
+            else if (celToFahrRadio.Checked == false)
+            {
+                fahrTxtBox.Visible = true;
+            }
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
             fahrTxtBox.Text = string.Empty;
-            celTxtBox.Text= string.Empty;
-            //Console.WriteLine("Inputs cleared");
+            celTxtBox.Text = string.Empty;
+            fahrToCelRadio.Checked = false;
+            celToFahrRadio.Checked = false;
             System.Diagnostics.Debug.WriteLine("Input fields have been cleared");
+            Console.WriteLine("Inputs cleared");
         }
 
         private void fahrToCelRadio_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (fahrToCelRadio.Checked == true)
+            {
+                celTxtBox.Visible = false;
+            }
+            else if (fahrToCelRadio.Checked == false)
+            {
+                celTxtBox.Visible = true;
+            }
         }
 
         private void fahrTxtBox_TextChanged(object sender, EventArgs e)
@@ -117,6 +146,16 @@ namespace Convert
         }
 
         private void celTxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
         {
 
         }
